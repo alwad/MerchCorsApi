@@ -11,7 +11,8 @@ using System.Web.Http.Cors;
 namespace Api.carmax.org.Controllers
 {
 
-    [EnableCors(origins: "http://merchcorsweb.azurewebsites.net", headers: "*", methods: "*")]
+    [EnableCors(origins: "http://merchcorsweb.azurewebsites.net", headers: "*", methods: "*",
+        PreflightMaxAge = 2147483647)]
     [Authorize]
 
     public class Resource2Controller : ApiController
