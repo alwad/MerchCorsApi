@@ -21,8 +21,7 @@ namespace Api.carmax.org.Controllers
         public IEnumerable<string> Get()
         {
             var user = User as ClaimsPrincipal;
-            var name = user.Claims.Where(c => c.Type == "http://carmax.org/ADFS/Attribute/displayName").FirstOrDefault();
-            return new string[] { "hello oAuth2 world", string.Format("hello user {0}.", name.Value) };
+            return new string[] { "hello oAuth2 world", string.Format("hello user {0}.", User.Identity.Name) };
         }
 
         public IEnumerable<string> Put()
