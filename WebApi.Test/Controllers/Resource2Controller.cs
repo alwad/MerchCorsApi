@@ -10,7 +10,7 @@ using System.Web.Http.Cors;
 
 namespace Api.carmax.org.Controllers
 {
-    [EnableCors(origins: "*", headers: "*", methods: "*")]
+    [EnableCors(origins: "merchcorsweb.azurewebsites.net", headers: "*", methods: "*")]
     [Authorize]
 
     public class Resource2Controller : ApiController
