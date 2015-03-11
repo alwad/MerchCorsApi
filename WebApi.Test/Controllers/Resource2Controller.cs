@@ -18,12 +18,21 @@ namespace Api.carmax.org.Controllers
     public class Resource2Controller : ApiController
     {
         static Dictionary<string, int> ClientCounter = new Dictionary<string, int>();
+        static Dictionary<string, int> GetCounter = new Dictionary<string, int>();
 
         // GET api/values
         public IEnumerable<string> Get()
         {
             var user = User as ClaimsPrincipal;
-            return new string[] { "hello oAuth2 world", string.Format("hello user {0}.", User.Identity.Name) };
+
+            var client = user.Claims.Where(c => c.Type == "https://www.carmax.org/auth/client").FirstOrDefault();
+
+            if (!GetCounter.ContainsKey(client.Value))
+                GetCounter.Add(client.Value, 0);
+
+            GetCounter[client.Value]++;
+
+            return new string[] { "hello oAuth2 world", string.Format("hello user {0}.  Get counter: {1}", User.Identity.Name, GetCounter[client.Value]) };
         }
 
         public IEnumerable<string> Put()
@@ -36,7 +45,7 @@ namespace Api.carmax.org.Controllers
             var client = user.Claims.Where(c => c.Type == "https://www.carmax.org/auth/client").FirstOrDefault();
 
             
-
+            
             if (!ClientCounter.ContainsKey(client.Value))
                 ClientCounter.Add(client.Value, 0);
 
